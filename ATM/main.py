@@ -145,5 +145,16 @@ def main():
             continue
         print("Processing...")
         if choice in transaction:
-            break
+            if choice == 1:
+                create_account()
+            elif choice == 2:
+                deposite()
+            elif choice == 3:
+                withdraw()
+            elif choice == 4:
+                balance()
+            elif choice == 5:
+                log_in()
+            else:
+                print("Invalid input")
 main()
