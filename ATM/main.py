@@ -1,6 +1,7 @@
 import json
 import os
 import random
+import re
 DATA_FILE = "C:/PYTHON/ATM/usersv1.json"
 
 
@@ -17,7 +18,7 @@ def load_users(path=DATA_FILE):
 def save_users(users_info, path=DATA_FILE):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(users_info, f, indent=2)
-#Global 
+
 users_credential = load_users()
 def edit_user():
     print("Edit User Credentials")
@@ -53,9 +54,17 @@ def edit_user():
         new_fullname = input("Enter new fullname: ").strip()
         if not new_fullname:
             print("Fullname cannot be empty!")
-                
+            return
+        elif any(char.isdigit() for char in new_fullname): #Check is=f fullname contains numeric
+            print("Invalid fullname contains numeric!")
+            return
+        elif len(new_fullname) < 5:
+            print("Invalid Fullname")
+            return
+        else:
             users_credential[account_number]["fullname"] = new_fullname
             print("Fullname updated")
+
     save_users(users_credential)
 
 
