@@ -36,12 +36,18 @@ def edit_user():
         print("--->Invalid input, try again<---")
 
     if choice == "1":
-        new_pin = input("New pin: ").strip()
-        if not new_pin.isdigit() or len(new_pin) < 4:
-            print(f"Pin must be digit and atleast 4 digits: ")
+        try:
+            new_pin = int(input("New pin: ").strip())
+        except ValueError:
+            print("PIN must be numeric!")
+        if len(new_pin) < 4:
+            print(f"Pin must be atleast 4 digits: ")
             return
-        users_credential[account_number]["pin"] = new_pin
-        print("PIN updated!")
+        if new_pin == users_credential[account_number]["pin"]:
+            print("You entered previous PIN! Try new one")
+        else:
+            users_credential[account_number]["pin"] = new_pin
+            print("PIN updated!")
     else:
         new_fullname = input("Enter new fullname: ").strip()
         if not new_fullname:
@@ -142,7 +148,7 @@ def main():
             elif choice == 4:
                 balance()
             elif choice == 5:
-                log_in()
+                edit_user()
             else:
                 print("Invalid input")
 main()
