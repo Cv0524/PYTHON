@@ -50,9 +50,9 @@ def edit_user():
                 print("PIN updated!")
                 valid_input = False
     else:
-            new_fullname = input("Enter new fullname: ").strip()
-            if not new_fullname:
-                print("Fullname cannot be empty!")
+        new_fullname = input("Enter new fullname: ").strip()
+        if not new_fullname:
+            print("Fullname cannot be empty!")
                 
             users_credential[account_number]["fullname"] = new_fullname
             print("Fullname updated")
