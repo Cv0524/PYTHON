@@ -102,12 +102,18 @@ def withdraw():
     print("---> Withdraw <---")
     acct = input("Enter your account number: ")
     if acct in users_credential:
-        amount = int(input("Enter amount: "))
-        current_balance = users_credential[acct]["balance"]
-        new_balance = current_balance - amount
-        users_credential[acct]["balance"] = new_balance
-        print("Processing...")
-        print(f"{amount} Withdraw sucessully!")
+        try:
+            amount = int(input("Enter amount: "))
+            current_balance = users_credential[acct]["balance"]
+            if amount > current_balance:
+                print("Enough funds")
+            else:
+                new_balance = current_balance - amount
+                users_credential[acct]["balance"] = new_balance
+                print("Processing...")
+                print(f"{amount} Withdraw sucessully!")
+        except ValueError:
+            print("Enter proper amount")
     else:
         print("Invalid credentials")
     save_users(users_credential)
@@ -133,7 +139,7 @@ def deposite():
 
 def main():
     print("---> ATM machine <---")
-    transaction = {1, 2, 3, 4, 5}
+    transaction = {1, 2, 3, 4, 5,6}
     while True:
         print("Transactions: ")
         print("[1] Create Account (New Client)")
@@ -141,16 +147,19 @@ def main():
         print("[3] Withdraw")
         print("[4] Balance")
         print("[5] Edit Credentials")
+        print("[6] to terminate")
+
         try:
             choice = int(input("Type here: ").strip())
-        except ValueError:  # catch wrong input like 'ss'
-            print("!!---> Invalid input enter a number 1-5 <---!!")
+            if choice not in transaction:
+                print("!!---> Invalid transaction enter a number 1-6 <---!!")
+                continue
+        except ValueError:  # catch wrong input like string
+            print("!!---> Invalid input<---!!")
             continue
-        if choice not in transaction:
-            print("!!---> Invalid transaction <---!!")
-            continue
-        print("Processing...")
+        
         if choice in transaction:
+            print("Processing...")
             if choice == 1:
                 create_account()
             elif choice == 2:
@@ -161,6 +170,9 @@ def main():
                 balance()
             elif choice == 5:
                 edit_user()
+            elif choice == 6:
+                print("Good Bye!")
+                break
             else:
                 print("Invalid input")
 main()
