@@ -36,25 +36,26 @@ def edit_user():
         print("--->Invalid input, try again<---")
 
     if choice == "1":
-        try:
-            new_pin = int(input("New pin: ").strip())
-        except ValueError:
-            print("PIN must be numeric!")
-        if len(new_pin) < 4:
-            print(f"Pin must be atleast 4 digits: ")
-            return
-        if new_pin == users_credential[account_number]["pin"]:
-            print("You entered previous PIN! Try new one")
-        else:
-            users_credential[account_number]["pin"] = new_pin
-            print("PIN updated!")
+        valid_input = True
+        while valid_input:
+            new_pin = input("New pin: ").strip()
+            if len(new_pin) < 4: #check the length of the pin
+                print(f"Pin must be atleast 4 digits: ")
+                continue
+            if new_pin == users_credential[account_number]["pin"]: # check if new pin is like in the previous pin
+                print("You entered previous PIN! Try new one")
+                continue
+            else:
+                users_credential[account_number]["pin"] = new_pin
+                print("PIN updated!")
+                valid_input = False
     else:
-        new_fullname = input("Enter new fullname: ").strip()
-        if not new_fullname:
-            print("Fullname cannot be empty!")
-            return
-        users_credential[account_number]["fullname"] = new_fullname
-        print("Fullname updated")
+            new_fullname = input("Enter new fullname: ").strip()
+            if not new_fullname:
+                print("Fullname cannot be empty!")
+                
+            users_credential[account_number]["fullname"] = new_fullname
+            print("Fullname updated")
     save_users(users_credential)
 
 
