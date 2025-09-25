@@ -1,0 +1,34 @@
+users = {"alice": {"pin": "1234", "name": "Alice D"}}.
+
+accounts = {"100001": {"owner_username": "alice", "balance": 500.0}}.
+
+transactions = [{"type": "deposit", "account_no": "100001", "amount": 200.0, "ts": "2025-09-25T13:00:00", "note": "ATM cash in"}].
+
+Core features
+Create: new user, new account, initial deposit.
+
+Read: list users/accounts, view account details, view transaction history.
+
+Update: change PIN, rename user, deposit, withdraw, transfer.
+
+Delete: delete account (only if zero balance), delete user (only if no accounts).
+
+Auth: login by username + PIN; session state stored in a variable.
+
+Menus
+Main menu: Register, Login, Admin/CRUD, Exit.
+
+After login: Balance, Deposit, Withdraw, Transfer, Transactions, Change PIN, Logout.
+
+Admin/CRUD menu: Create user/account, List, Update user fields, Delete.
+
+Validation rules
+PIN: exactly 4 digits.
+
+Account number: numeric, auto-increment as string.
+
+Amounts: positive floats with two decimals, block negative/zero for ops.
+
+Withdraw/transfer: enforce sufficient funds.
+
+Ownership: only owner can operate own accounts (except Admin).
