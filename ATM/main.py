@@ -110,6 +110,8 @@ def balance():
     acct = input("Enter you account number: ")
     if acct in users_credential:
         print("You current balance: ", users_credential[acct]["balance"])
+    else:
+        print("Invalid credentials")
 def deposite():
     print("---> Deposite <---")
     acct = input("Enter your account number: ")
@@ -122,8 +124,6 @@ def deposite():
     else:
         print("Invalic credentials!")
     save_users(users_credential)
-
-
 
 def main():
     print("---> ATM machine <---")
