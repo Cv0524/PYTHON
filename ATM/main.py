@@ -51,20 +51,22 @@ def edit_user():
                 print("PIN updated!")
                 valid_input = False
     else:
-        new_fullname = input("Enter new fullname: ").strip()
-        if not new_fullname:
-            print("Fullname cannot be empty!")
-            return
-        elif any(char.isdigit() for char in new_fullname): #Check is=f fullname contains numeric
-            print("Invalid fullname contains numeric!")
-            return
-        elif len(new_fullname) < 5:
-            print("Invalid Fullname")
-            return
-        else:
-            users_credential[account_number]["fullname"] = new_fullname
-            print("Fullname updated")
-
+        valid_input_fullname = True
+        while valid_input_fullname:
+            new_fullname = input("Enter new fullname: ").strip()
+            if not new_fullname:
+                print("Fullname cannot be empty!")
+                continue
+            elif any(char.isdigit() for char in new_fullname): #Check is=f fullname contains numeric
+                print("Invalid fullname contains numeric!")
+                continue
+            elif len(new_fullname) < 5:
+                print("Invalid Fullname")
+                continue
+            else:
+                users_credential[account_number]["fullname"] = new_fullname
+                print("Fullname updated")
+                valid_input_fullname = False
     save_users(users_credential)
 
 
