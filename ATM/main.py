@@ -79,19 +79,7 @@ def create_account():
         cont = input("Add another? (y/n): ").strip().lower()
         if cont != "y":
             break
-def log_in():
-    acct = input("Enter account number: ").strip()
-    if acct not in users_credential:
-        print("account not found")
-        return False
-    e_pin = input("Enter pin: ").strip()
-    if acct in users_credential:
-        if users_credential[acct]["pin"] == e_pin:
-            print("Login Sucessfully!")
-            return edit_user()
-    else:
-        print("Invalid Credentials")
-        return False
+
 def withdraw():
     print("---> Withdraw <---")
     acct = input("Enter your account number: ")
@@ -134,7 +122,7 @@ def main():
         print("[2] Deposit")
         print("[3] Withdraw")
         print("[4] Balance")
-        print("[5] Login (Edit Credentials)")
+        print("[5] Edit Credentials")
         try:
             choice = int(input("Type here: ").strip())
         except ValueError:  # catch wrong input like 'ss'
